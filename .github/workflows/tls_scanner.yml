@@ -1,0 +1,44 @@
+name: TLS Scanner Automation
+
+on:
+  push:
+    paths:
+      - 'targets.txt'
+  schedule:
+    - cron: '0 * * * *'  # Every 1 hour (UTC)
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y nmap
+          pip install fpdf
+
+      - name: 🧪 Run TLS Cipher Scanner (Push Trigger)
+        if: github.event_name == 'push'
+        run: |
+          python tls_cipher_scanner.py push
+
+      - name: 🧪 Run TLS Cipher Scanner (Scheduled)
+        if: github.event_name == 'schedule'
+        run: |
+          python tls_cipher_scanner.py daily
+
+      - name: 📤 Upload PDF Report Artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tls-scan-report
+          path: output/
