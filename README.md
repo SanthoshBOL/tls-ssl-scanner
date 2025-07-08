@@ -6,25 +6,23 @@ A fully automated TLS/SSL security scanning tool that performs **hourly scans** 
 
 ## 🚀 Key Features
 
-✅ **Fully Automated Scanning**  
-- Scans run **every hour** automatically via GitHub Actions  
-- Also triggers immediately on **any update to `targets.txt`**  
-- Requires **zero manual execution**
-
-✅ **Comprehensive TLS/SSL Cipher Check**  
-- Uses `nmap` with `ssl-enum-ciphers` to scan for outdated/weak protocols and ciphers  
-- Flags:
-  - Insecure Protocols: `SSLv2`, `SSLv3`, `TLSv1.0`, `TLSv1.1`
-  - Weak Ciphers: `RC4`, `3DES`, `CBC`, etc.
-
-✅ **Detailed PDF Reports**  
-- Includes a summary cover page with timestamp, target count, status breakdown  
-- Each target has a dedicated page with:
-  - Scan output
-  - Highlighted vulnerabilities in **red**
-- Auto-saves reports to appropriate folders:
-  - `output/daily_scans/` → for scheduled scans
-  - `output/new_target_scans/` → for new target pushes
+- ✅ **Fully Automated Scanning**  
+  - Scans run **every hour** automatically via GitHub Actions  
+  - Also triggers immediately on **any update to `targets.txt`**  
+  - Requires **zero manual execution**
+- ✅ **Comprehensive TLS/SSL Cipher Check**  
+  - Uses `nmap` with `ssl-enum-ciphers` to scan for outdated/weak protocols and ciphers  
+  - Flags:
+    - Insecure Protocols: `SSLv2`, `SSLv3`, `TLSv1.0`, `TLSv1.1`
+    - Weak Ciphers: `RC4`, `3DES`, `CBC`, etc.
+- ✅ **Detailed PDF Reports**  
+  - Includes a summary cover page with timestamp, target count, status breakdown  
+  - Each target has a dedicated page with:
+    - Scan output
+    - Highlighted vulnerabilities in **red**
+  - Auto-saves reports to appropriate folders:
+    - `output/daily_scans/` → for scheduled scans
+    - `output/new_target_scans/` → for new target pushes
 
 ---
 
@@ -32,11 +30,9 @@ A fully automated TLS/SSL security scanning tool that performs **hourly scans** 
 
 1. **Update `targets.txt`**  
    Add or update the list of domains/APIs to be scanned (one per line).
-
 2. **GitHub Actions Trigger**  
    - On every **push to `targets.txt`**, a scan is triggered
    - Additionally, a scan runs **every 1 hour** using scheduled GitHub Actions
-
 3. **PDF Report Generation**  
    - Output file is auto-named as:
      - `HH-MM-AM/PM_YYYY-MM-DD_targets.pdf` for daily scans
@@ -46,15 +42,17 @@ A fully automated TLS/SSL security scanning tool that performs **hourly scans** 
 
 ## 📁 Project Structure
 
-├── targets.txt # List of domains to scan
-├── tls_cipher_scanner.py # Main scanner script
+```
+tls-ssl-scanner/
+├── targets.txt                # List of domains to scan
+├── tls_cipher_scanner.py      # Main scanner script
 ├── output/
-│ ├── daily_scans/ # PDF reports from scheduled runs
-│ └── new_target_scans/ # PDF reports from new targets pushed
+│   ├── daily_scans/          # PDF reports from scheduled runs
+│   └── new_target_scans/     # PDF reports from new targets pushed
 └── .github/
-└── workflows/
-└── tls-scan.yml # GitHub Actions automation workflow
-
+    └── workflows/
+        └── tls-scan.yml      # GitHub Actions automation workflow
+```
 
 ---
 
@@ -67,10 +65,12 @@ A fully automated TLS/SSL security scanning tool that performs **hourly scans** 
 
 ---
 
-## 🧪 Sample Targets Format (targets.txt)
+## 🧪 Sample Targets Format (`targets.txt`)
 
+```
 santhoshagain.github.io
 example.com
+```
 
 ---
 
