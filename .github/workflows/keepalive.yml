@@ -5,6 +5,9 @@ on:
     - cron: '0 * * * *'  # Every hour (UTC)
   workflow_dispatch:  # Manual trigger support
 
+permissions:  # ⬅️ ADD THIS BLOCK AT THE ROOT
+  contents: write
+
 jobs:
   keepalive:
     runs-on: ubuntu-latest
