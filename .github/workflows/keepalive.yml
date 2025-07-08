@@ -2,8 +2,8 @@ name: 🔄 Keep GitHub Actions Alive
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Runs every hour (UTC)
-  workflow_dispatch:      # Optional: allows manual trigger
+    - cron: '0 * * * *'  # Every hour (UTC)
+  workflow_dispatch:  # Manual trigger support
 
 jobs:
   keepalive:
@@ -15,7 +15,7 @@ jobs:
 
       - name: 🕓 Update timestamp
         run: |
-          echo "Last run: $(date -u)" > keepalive.txt
+          echo "Last run: $(date '+%I:%M %p – %Y-%m-%d')" > keepalive.txt
 
       - name: 🔄 Commit and push
         env:
